@@ -9,6 +9,12 @@ char* serverIP;
 
 void* frontEndServer(void*);
 
+/**
+ * @brief Handles client transactions, implements 2-phase COMMIT protocol and simple fault tolerance mechanism
+ * @param arg client socket descriptor
+ * @return NULL
+ */
+
 void* frontEndServer(void* arg){
     int clientSocket = *(int*)arg;
     int totalServers = 0;
@@ -192,8 +198,6 @@ int main(int argc, char** argv){
 	struct sockaddr_in client;
 	socklen_t clientAddrLen; 
 
-    //int* sock;
-
     // create socket (IPv4, stream-based, protocol set to TCP)
 	if((serverFd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
 		cout<<"ERROR:: Front-end server failed to create the listening socket"<<endl;
@@ -237,8 +241,6 @@ int main(int argc, char** argv){
 
     while((clientSocketFd = accept(serverFd, (struct sockaddr*) &client, &clientAddrLen))){
         cout<<"SUCCESS:: Front-end server accepted a client"<<endl;
-        // sock = new int;
-        // *sock = clientSocketFd;
         pthread_create(&t[threadCount++], NULL, frontEndServer, (void*) &clientSocketFd);
     }
     return 0;

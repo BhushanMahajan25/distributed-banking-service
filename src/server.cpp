@@ -9,7 +9,6 @@ pthread_mutex_t mx;
 
 void* backendServer(void*);
 int generateRandomNumber();
-int isRecord(int, vector<Record>&);
 
 /**
  * @brief Generate random number
@@ -22,27 +21,9 @@ int generateRandomNumber(){
 }
 
 /**
- * @brief Checks if user exists in vector<User> by comparing account number
- * @param accNum integer account number
- * @param recordVec reference of vector<User>
- * @return index if user exists; -1 otherwise
-*/
-int isRecord(int accNum, vector<Record> &recordVec){
-    int counter = 0;
-    for(Record &rc : recordVec){
-        if(rc.getAccountNumber() == accNum){
-            return counter;
-        }
-        counter++;
-    }
-    return -1;
-}
-
-/**
  * @brief backend server functionality: Performs COMMIT, ABORT operations
- * 
- * @param arg 
- * @return void* 
+ * @param arg socket descriptor
+ * @return NULL
  */
 void* backendServer(void* arg){
     int clientSocket = *(int*)arg;

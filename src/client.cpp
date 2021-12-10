@@ -10,10 +10,10 @@ void sendTxnToFrontServer();
 
 /**
  * @brief Sends transaction details to a front-end server.
- * Transaction Details: CREATE <initial deposit to account num 100>
- * QUERY <account number>
- * UPDATE <>
- * 
+ * Transaction Details: CREATE <initial deposit to account num 100>, 
+ * QUERY <account number>, 
+ * UPDATE <account number> <new amount>, 
+ * QUIT
  */
 void sendTxnToFrontServer(){
     char message[256];
