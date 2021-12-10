@@ -1,5 +1,7 @@
 #include "../header/common.hpp"
 #include<pthread.h>
+#include<ctime>
+#define MODNUM 4 // for showing abort scenario....please change it to 3 to get ABORT more often
 
 using namespace std;
 
@@ -11,13 +13,23 @@ void* backendServer(void*);
 int generateRandomNumber();
 
 /**
- * @brief Generate random number
+ * @brief Generate random number (backup function)
  * @return integer random number between 0 and 2, inclusive.
 */
-int generateRandomNumber(){
+int generateRandomNumber2(){
 	time_t t;
     srand((unsigned)time(&t));
     return (((rand()%100)*7) % 3);
+}
+
+/**
+ * @brief Generate random number (in-use function)
+ * @return integer random number between 0 and 3, inclusive.
+*/
+int generateRandomNumber(){
+	time_t t = time(NULL);
+    cout<<endl<<"******* EPOCH ******* :: "<<t<<endl;
+    return t % MODNUM;
 }
 
 /**
@@ -156,7 +168,6 @@ int main(int argc, char** argv){
 	int setReuseAddr = 1; // ON == 1  
 	int maxPendingConnections = 1;
 	char* serverIP = argv[1];
-    //int* sock;
     int threadCount = 0;
     pthread_t t[999];
 
@@ -204,8 +215,6 @@ int main(int argc, char** argv){
 	// get the size client's address struct
 	clientAddrLen = sizeof(client);
     while((serverSocketFd = accept(serverFd, (struct sockaddr*) &client, &clientAddrLen))){
-        // sock = new int;
-        // *sock = serverSocketFd;
         pthread_create(&t[threadCount++], NULL, backendServer, (void*) &serverSocketFd);
     }
 }
