@@ -1,27 +1,6 @@
 import os
 import sys
 
-
-# count=3;
-# front_port=$2;
-# > portsFile.txt
-# for i in $(seq 1 $count);
-# do {
-# echo "front_port is $front_port"
-# echo $front_port >> PortsFile.txt
-# front_port=$((front_port+1))
-# } done
-
-# front_port=$2;
-# for i in $(seq 1 $count);
-# do {
-# echo $front_port
-# gnome-terminal -e "bash -c \"./causualMessageOrdering $front_port 127.0.0.1; exec bash\""
-
-# front_port=$((front_port+1))
-# } done
-# exit 0
-
 n = len(sys.argv)
 if n < 3:
     sys.exit("Invalid number of args!")

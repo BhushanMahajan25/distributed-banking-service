@@ -1,4 +1,3 @@
-/*Client connects to front-end server*/
 #include "../header/common.hpp"
 
 using namespace std;
@@ -6,7 +5,6 @@ using namespace std;
 int clientFd;
 
 void sendTxnToFrontServer();
-
 
 /**
  * @brief Sends transaction details to a front-end server.
