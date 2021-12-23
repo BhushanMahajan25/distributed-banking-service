@@ -30,4 +30,4 @@ OR
 (Python version used: 3.8.9)
 3. ``make clean``
 
-Implementation.md explains the working of multi-threading in detail.
+ [Implementation.md](https://github.com/BhushanMahajan25/distributed-banking-service/blob/main/Implementation.md) explains the working of multi-threading in detail.
